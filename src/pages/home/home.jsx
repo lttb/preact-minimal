@@ -1,11 +1,14 @@
-import Preact from 'preact'
+import Preact from 'preact';
+import styled from 'reshadow';
 
 function Home() {
-  return (
-    <Main>
+  return styled`
+    p { color: red; }
+  `(
+    <main>
       <p>It feels like home</p>
-    </Main>
-  )
+    </main>,
+  );
 }
 
-export default Home
+export default Home;

@@ -1,10 +1,10 @@
-import path from 'path'
-import HtmlPlugin from 'html-webpack-plugin'
+import path from 'path';
+import HtmlPlugin from 'html-webpack-plugin';
 
-const basePath = path.join(__dirname, '..', 'src')
-const env = process.env.NODE_ENV || 'development'
+const basePath = path.join(__dirname, '..', 'src');
+const env = process.env.NODE_ENV || 'development';
 
-console.log('Webpack running in ' + env)
+console.log('Webpack running in ' + env);
 
 export default {
   entry: {
@@ -32,12 +32,25 @@ export default {
     rules: [
       {
         test: /\.jsx?$/,
-        loader: 'babel-loader',
+        loader: ['reshadow/webpack/loader', 'babel-loader'],
         include: [basePath],
       },
       {
         test: /\.svg$/,
         loader: 'svg-inline-loader',
+      },
+      {
+        test: /\.css$/,
+        loader: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: { modules: true, importLoaders: 1 },
+          },
+          {
+            loader: 'postcss-loader',
+          },
+        ],
       },
     ],
   },
@@ -47,4 +60,4 @@ export default {
     port: 4000,
     contentBase: path.join(basePath, 'build'),
   },
-}
+};
